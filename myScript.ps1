@@ -5,6 +5,7 @@ $getSystemInfo = Get-CimInstance Win32_OperatingSystem | Select-Object  Caption,
 $computerInfo = Get-ComputerInfo | Select-Object LogonServer, PowerPlatformRole, DeviceGuardSmartStatus, WindowsBuildLabEx, WindowsCurrentVersion, WindowsEditionId, WindowsInstallationType, WindowsInstallDateFromRegistry, WindowsProductId, WindowsProductName, WindowsSystemRoot ,WindowsVersion
 $services = Get-Service
 $getNetstat = netstat -n
+$dc = nltest /dclist:services
 $sheduled =  Get-ScheduledTask | Get-ScheduledTaskInfo
 
 "#################### All Users ####################" > 'text.txt'
@@ -24,5 +25,7 @@ $computerInfo >> 'text.txt'
 $services >> 'text.txt'
 "#################### Netstat Output ####################" >> 'text.txt'
 $getNetstat >> 'text.txt'
+"#################### Domain Controller ####################" >> 'text.txt'
+$dc >> 'text.txt'
 "#################### Sheduled Tasks ####################" >> 'text.txt'
 $sheduled >> 'text.txt'
